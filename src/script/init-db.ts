@@ -16,15 +16,15 @@ async function initDB() {
     );
   `);
 
-  // // Example content for a coin
-  // await db.run(`
-  //   INSERT INTO content (coin_address, title, body)
-  //   VALUES (
-  //     '0xYourZoraCoinAddress',
-  //     'SCP-042: The Singing Forest',
-  //     'This is the secret classified content that is only visible to holders of this coin.'
-  //   );
-  // `);
+  // Example content for a coin
+  await db.run(`
+    INSERT INTO content (coin_address, title, body)
+    VALUES (
+      '0xe90af9670eb73e3aba8176a5aeabfb9c260af930',
+      'SCP-042: The Singing Forest',
+      'This is the secret classified content that is only visible to holders of this coin.'
+    );
+  `);
 
   console.log('✅ Database initialized and seeded.');
   await db.close();
