@@ -46,4 +46,61 @@ export async function GET(request: NextRequest) {
       { status: 500 }
     );
   }
-} 
+}
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const { coin_address, title, body: content } = body;
+
+    // Validate required fields
+    if (!coin_address || !title || !content) {
+      return NextResponse.json(
+        { error: 'coin_address, title, and body are required' },
+        { status: 400 }
+      );
+    }
+
+    const db = await open({
+      filename: './data/content.db',
+      driver: sqlite3.Database,
+    });
+
+    // Check if content already exists for this token
+    const existingContent = await db.get(
+      'SELECT id FROM content WHERE coin_address = ?',
+      [coin_address.toLowerCase()]
+    );
+
+    if (existingContent) {
+      await db.close();
+      return NextResponse.json(
+        { error: 'Content already exists for this token address' },
+        { status: 409 }
+      );
+    }
+
+    // Insert new content
+    const result = await db.run(
+      'INSERT INTO content (coin_address, title, body) VALUES (?, ?, ?)',
+      [coin_address.toLowerCase(), title, content]
+    );
+
+    await db.close();
+
+    return NextResponse.json({
+      success: true,
+      id: result.lastID,
+      coin_address: coin_address.toLowerCase(),
+      title,
+      body: content,
+    });
+
+  } catch (error) {
+    console.error('Database error:', error);
+    return NextResponse.json(
+      { error: 'Failed to create content' },
+      { status: 500 }
+    );
+  }
+}

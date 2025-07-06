@@ -282,7 +282,15 @@ export default function CreateTokenPage() {
                 Zora Token Creator
               </h1>
             </div>
-            <ConnectButton />
+            <div className="flex items-center space-x-4">
+              <a
+                href="/create-content"
+                className="px-4 py-2 bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white rounded-lg transition-all duration-200 text-sm font-medium"
+              >
+                📝 Create Content
+              </a>
+              <ConnectButton />
+            </div>
           </div>
         </div>
       </header>
