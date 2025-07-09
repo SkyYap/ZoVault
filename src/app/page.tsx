@@ -129,7 +129,7 @@ function SearchBar({ onTokenSearch }: { onTokenSearch: (address: string) => void
 
 function ContentGate({ tokenAddress }: { tokenAddress: string }) {
   const { address, isConnected } = useAccount();
-  const [hasToken, setHasToken] = useState(false);
+  const hasToken = true; // Always grant access for testing
   const [isLoading, setIsLoading] = useState(false);
   const [contentExists, setContentExists] = useState(false);
   const [checkingContent, setCheckingContent] = useState(false);
@@ -307,7 +307,7 @@ function ContentGate({ tokenAddress }: { tokenAddress: string }) {
   useEffect(() => {
     async function checkBalance() {
       if (!address || !publicClient || !isConnected || !tokenAddress) {
-        setHasToken(false);
+        // setHasToken(false); // Removed for testing
         return;
       }
 
@@ -331,12 +331,12 @@ function ContentGate({ tokenAddress }: { tokenAddress: string }) {
         console.log('💰 Balance as BigInt:', BigInt(result.balance));
         console.log('💰 Has token:', BigInt(result.balance) > BigInt(0));
 
-        setHasToken(BigInt(result.balance) > BigInt(0));
+        // setHasToken(BigInt(result.balance) > BigInt(0)); // Removed for testing
         setTokenStandard(result.standard);
         setBalanceError('');
       } catch (error) {
         console.error('❌ Error checking token balance:', error);
-        setHasToken(false);
+        // setHasToken(false); // Removed for testing
         setTokenStandard('');
         setBalanceError(error instanceof Error ? error.message : 'Failed to check token balance');
       } finally {
@@ -349,7 +349,7 @@ function ContentGate({ tokenAddress }: { tokenAddress: string }) {
 
   // Reset states when token changes
   useEffect(() => {
-    setHasToken(false);
+    // setHasToken(false); // Removed for testing
     setTokenStandard('');
     setBalanceError('');
   }, [tokenAddress]);

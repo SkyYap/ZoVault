@@ -21,6 +21,9 @@
     "wagmi": "^2.15.6"
   },
   "devDependencies": {
+    "@stagewise-plugins/react": "^0.5.0",
+    "@stagewise/toolbar": "^0.5.0",
+    "@stagewise/toolbar-next": "^0.5.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
