@@ -55,8 +55,6 @@ We plan to grow Zovault into the **first storytelling launchpad** on Zora — em
 ---
 
 
----
-
 ## 🛠️ Getting Started (Local Dev)
 
 ```bash
